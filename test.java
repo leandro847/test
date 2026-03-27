@@ -1,5 +1,6 @@
 class Test{
     public static void main(String[] args) throws Exception {
-        System.out.printf("test");
+        System.out.println("test");
+        System.out.println("test2");
     }
 }
