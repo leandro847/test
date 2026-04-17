@@ -1,4 +1,3 @@
-// Test
 package com.example;
 
 public class Main {
