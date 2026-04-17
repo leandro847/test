@@ -24,11 +24,12 @@ package healthtracker;
  */
 
 import java.time.LocalDate;
+
 public class Appointment {
     private Doctor doctor;
-    private Date date;
+    private LocalDate date;
     private Time time;
-    Appointment(Doctor doc, Date d, Time t){
+    Appointment(Doctor doc, LocalDate d, Time t){
         doctor = doc;
         date = d;
         time = t;
@@ -38,7 +39,7 @@ public class Appointment {
         doctor = doc;
     }
     
-    public void setDate(Date d){
+    public void setDate(LocalDate d){
         date = d;
     }
     
@@ -50,7 +51,7 @@ public class Appointment {
         return doctor;
     }
     
-    public Date getDate(){
+    public LocalDate getDate(){
         return date;
     }
     
@@ -60,6 +61,9 @@ public class Appointment {
     
     @Override
     public String toString(){
-        return String.format("%s\n%s \n%d/%d/%d \n%d:%d", doctor.getName(), doctor.getAddress(), date.getDay(), date.getMonth(), date.getYear(), time.getHour(), time.getMinute());
+        return String.format("%s\n%s \n%d/%d/%d \n%d:%d",
+                getDoctor().getName(), getDoctor().getAddress(),
+                getDate(), getDate().getMonth(), getDate().getYear(),
+                getTime().getHour(), getTime().getMinute());
     }
 }
