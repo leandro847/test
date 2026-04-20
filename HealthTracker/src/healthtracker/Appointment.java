@@ -29,7 +29,7 @@ public class Appointment {
     private Doctor doctor;
     private LocalDate date;
     private Time time;
-    Appointment(Doctor doc, LocalDate d, Time t){
+    public Appointment(Doctor doc, LocalDate d, Time t){
         doctor = doc;
         date = d;
         time = t;

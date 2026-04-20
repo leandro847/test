@@ -11,7 +11,7 @@ package healthtracker;
 public class Doctor {
     private String name;
     private String address;
-    Doctor(String name, String address){
+    public Doctor(String name, String address){
         this.name = name;
         this.address = address;
     }

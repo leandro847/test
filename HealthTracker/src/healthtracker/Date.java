@@ -30,16 +30,16 @@ public class Date {
     private int day;
     private int month;
     private int year;
-    private int[] dayOfMonthLeapYear = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    private int[] dayOfMonthNonLeapYear = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final int[] dayOfMonthLeapYear = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final int[] dayOfMonthNonLeapYear = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     
-    Date(){
+    public Date(){
         day = 1;
         month = 1;
         year = 1;
     }
     
-    Date(int m, int d, int y){
+    public Date(int m, int d, int y){
         setYear(y);
         setMonth(m);
         setDay(d);
@@ -88,7 +88,7 @@ public class Date {
     
     public void nextDay(){
         if (month == 2){
-            if (isLeapYear(year) == false){
+            if (isLeapYear(getYear()) == false){
                 if (day == dayOfMonthNonLeapYear[2]){
                     setDay(1);
                     setMonth(3);

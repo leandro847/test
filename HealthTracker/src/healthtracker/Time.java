@@ -24,11 +24,11 @@ public class Time {
     private int hour;
     private int minute;
     
-    Time(){
+    public Time(){
         hour = 0;
         minute = 0;
     }
-    Time(int h, int m){
+    public Time(int h, int m){
         setHour(h);
         setMinute(m);
     }
