@@ -8,14 +8,14 @@ package gui;
  *
  * @author dinhtran
  */
-public class TabBarsPage extends javax.swing.JFrame {
+public class DeleteAppointmentConfirmation extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TabBarsPage.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DeleteAppointmentConfirmation.class.getName());
 
     /**
      * Creates new form Appointments
      */
-    public TabBarsPage() {
+    public DeleteAppointmentConfirmation() {
         initComponents();
     }
 
@@ -145,7 +145,7 @@ public class TabBarsPage extends javax.swing.JFrame {
                 "Date", "Time", "Doctor", "Address"
             }
         ));
-        jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jTable2.setSelectionForeground(new java.awt.Color(102, 102, 102));
         jScrollPane5.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -221,7 +221,7 @@ public class TabBarsPage extends javax.swing.JFrame {
             }
         ));
         jTable1.setColumnSelectionAllowed(true);
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jTable1.setSelectionForeground(new java.awt.Color(102, 102, 102));
         jScrollPane3.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -306,7 +306,7 @@ public class TabBarsPage extends javax.swing.JFrame {
                 "ID", "Name", "Speciality", "Phone", "Email", "Address"
             }
         ));
-        jTable3.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jTable3.setSelectionForeground(new java.awt.Color(102, 102, 102));
         jScrollPane6.setViewportView(jTable3);
         jTable3.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable3.getColumnModel().getColumnCount() > 0) {
@@ -454,23 +454,14 @@ public class TabBarsPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-    
-    private void newAppointmnetButton(java.awt.event.ActionEvent evt){
-        NewAppointment newAppointment = new NewAppointment();
-        newAppointment.setVisible(true);
-        this.dispose();
-    }
-    
-    private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentButtonActionPerformed
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
-        EditAppointment edit = new EditAppointment();
-        edit.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_editAppointmentButtonActionPerformed
-    
+    }//GEN-LAST:event_jButton13ActionPerformed
+
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -479,14 +470,23 @@ public class TabBarsPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
-
+        EditAppointment edit = new EditAppointment();
+        edit.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_editAppointmentButtonActionPerformed
+    
+    private void newAppointmnetButton(java.awt.event.ActionEvent evt){
+        NewAppointment newAppointment = new NewAppointment();
+        newAppointment.setVisible(true);
+        this.dispose();
+    }
+        
     /**
      * @param args the command line arguments
      */
@@ -509,7 +509,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TabBarsPage().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new DeleteAppointmentConfirmation().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
