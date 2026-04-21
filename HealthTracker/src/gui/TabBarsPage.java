@@ -4,9 +4,13 @@
  */
 package gui;
 
+import java.util.List;
+import java.util.ArrayList;
+import healthtracker.*;
+
 /**
  *
- * @author dinhtran
+ * @author dinhtran, Amy Schmieder
  */
 public class TabBarsPage extends javax.swing.JFrame {
     
@@ -17,6 +21,57 @@ public class TabBarsPage extends javax.swing.JFrame {
      */
     public TabBarsPage() {
         initComponents();
+        loadTreatments();
+    }
+    
+    
+    /**
+     * populate the jTableTreatments table
+     * @author Amy Schmieder
+    */
+    private void loadTreatments() {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTableTreatments.getModel();
+
+        model.setRowCount(0); // clear table
+
+        List<Treatment> treatments = getTreatments(); 
+
+        for (Treatment t : treatments) {
+            if(t instanceof Medication){
+                Medication m = (Medication)t;
+                model.addRow(new Object[]{
+                    m.getName(),
+                    m.getDose(),
+                    m.getFrequency(),
+                    m.getPurpose(),
+                    m.getNotes()
+                });
+            } else {
+                model.addRow(new Object[]{
+                    t.getName(),
+                    "N/A",
+                    t.getFrequency(),
+                    t.getPurpose(),
+                    t.getNotes()
+                });
+            }
+
+        }
+    }
+       
+    /**
+     * get the treatment list to populate the Treatments table. Passed to 
+     * loadTreatments
+     * @author Amy Schmieder
+     * this should be done dynamically, perhaps from a db, but this is a start
+     * to make the rest of it appear dynamic
+     * @return treatments
+    */
+    private List<Treatment> getTreatments(){
+        ArrayList<Treatment> treatments = new ArrayList<Treatment>();
+        treatments.add(new Medication(0, 0, "Amoxicillin", "Take with food", "antibiotic", 8, "12mg", 20));
+        treatments.add(new Treatment(0, 0, "Blood Pressure measurement", "", "Monitor blood pressure", 24));
+        return treatments;
     }
 
     /**
@@ -45,7 +100,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableTreatments = new javax.swing.JTable();
         jScrollBar2 = new javax.swing.JScrollBar();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -194,7 +249,7 @@ public class TabBarsPage extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -208,8 +263,8 @@ public class TabBarsPage extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setForeground(new java.awt.Color(102, 102, 102));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTreatments.setForeground(new java.awt.Color(102, 102, 102));
+        jTableTreatments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Amociline", "10 m", "Every morning", "Infection", "With food"},
                 {"Eye drop", "2 drops per eyes", "At night", "Red eye", null},
@@ -220,12 +275,13 @@ public class TabBarsPage extends javax.swing.JFrame {
                 "Name", "Dose", "Frequency", "Purpose", "Note"
             }
         ));
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane3.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTableTreatments.setColumnSelectionAllowed(true);
+        jTableTreatments.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jTableTreatments.setShowGrid(true);
+        jScrollPane3.setViewportView(jTableTreatments);
+        jTableTreatments.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTableTreatments.getColumnModel().getColumnCount() > 0) {
+            jTableTreatments.getColumnModel().getColumn(0).setResizable(false);
         }
 
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -546,9 +602,9 @@ public class TabBarsPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTableTreatments;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
