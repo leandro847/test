@@ -8,14 +8,14 @@ import healthtracker.*;
  *
  * @author dinhtran
  */
-public class EditAppointment extends javax.swing.JFrame {
+public class AddAppointment extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditAppointment.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddAppointment.class.getName());
 
     /**
      * Creates new form EditAppointment
      */
-    public EditAppointment() {
+    public AddAppointment() {
         initComponents();
     }
 
@@ -64,12 +64,13 @@ public class EditAppointment extends javax.swing.JFrame {
         editAppointmentButton.addActionListener(this::editAppointmentButtonActionPerformed);
 
         newAppointmnetButton.setForeground(new java.awt.Color(102, 102, 102));
-        newAppointmnetButton.setText("Update Appointment");
+        newAppointmnetButton.setText("Add Appointment");
         newAppointmnetButton.setMaximumSize(new java.awt.Dimension(140, 25));
         newAppointmnetButton.setPreferredSize(new java.awt.Dimension(140, 25));
+        newAppointmnetButton.addActionListener(this::newAppointmnetButtonActionPerformed);
 
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Edit Appointment:");
+        jLabel2.setText("Add New Appointment:");
 
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Date:");
@@ -204,12 +205,15 @@ public class EditAppointment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentButtonActionPerformed
-
         TabBarsPage tp;
         tp = new TabBarsPage();
         tp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editAppointmentButtonActionPerformed
+
+    private void newAppointmnetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAppointmnetButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newAppointmnetButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,7 +237,7 @@ public class EditAppointment extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new EditAppointment().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new AddAppointment().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

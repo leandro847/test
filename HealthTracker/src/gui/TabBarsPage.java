@@ -7,6 +7,7 @@ package gui;
 import java.util.List;
 import java.util.ArrayList;
 import healthtracker.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -106,18 +107,18 @@ public class TabBarsPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        appointmentMain = new javax.swing.JPanel();
+        upcomintAppointment = new javax.swing.JScrollPane();
         firstComingAppointment = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         editAppointmentButton = new javax.swing.JButton();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        searchTextFieldAppointment = new javax.swing.JTextField();
+        appointmentScrollBar1 = new javax.swing.JScrollBar();
+        appointmentSearch = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         deleteAppointmentButton = new javax.swing.JButton();
         newAppointmnetButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        appointmentsTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableTreatments = new javax.swing.JTable();
@@ -175,14 +176,14 @@ public class TabBarsPage extends javax.swing.JFrame {
         jTabbedPane4.setForeground(new java.awt.Color(0, 102, 255));
         jTabbedPane4.setPreferredSize(new java.awt.Dimension(800, 470));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(800, 470));
+        appointmentMain.setBackground(new java.awt.Color(255, 255, 255));
+        appointmentMain.setPreferredSize(new java.awt.Dimension(800, 470));
 
         firstComingAppointment.setColumns(20);
         firstComingAppointment.setForeground(new java.awt.Color(51, 51, 51));
         firstComingAppointment.setRows(5);
         firstComingAppointment.setText("Date: \t8/12/2026\nTime: \t1:00pm\nDoctor:\tTimothy\nAddress:\t123 Vegas Ave., Milpitas, CA, 95035");
-        jScrollPane1.setViewportView(firstComingAppointment);
+        upcomintAppointment.setViewportView(firstComingAppointment);
 
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Upcoming appointment:");
@@ -192,21 +193,23 @@ public class TabBarsPage extends javax.swing.JFrame {
         editAppointmentButton.setMaximumSize(new java.awt.Dimension(140, 25));
         editAppointmentButton.addActionListener(this::editAppointmentButtonActionPerformed);
 
-        searchTextFieldAppointment.setForeground(new java.awt.Color(102, 102, 102));
+        appointmentSearch.setForeground(new java.awt.Color(102, 102, 102));
 
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Search");
 
         deleteAppointmentButton.setForeground(new java.awt.Color(102, 102, 102));
         deleteAppointmentButton.setText("Delete Appointment");
+        deleteAppointmentButton.addActionListener(this::deleteAppointmentButtonActionPerformed);
 
         newAppointmnetButton.setForeground(new java.awt.Color(102, 102, 102));
         newAppointmnetButton.setText("New Appointment");
         newAppointmnetButton.setMaximumSize(new java.awt.Dimension(140, 25));
         newAppointmnetButton.setPreferredSize(new java.awt.Dimension(140, 25));
+        newAppointmnetButton.addActionListener(this::newAppointmnetButtonActionPerformed);
 
-        jTable2.setForeground(new java.awt.Color(102, 102, 102));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        appointmentsTable.setForeground(new java.awt.Color(102, 102, 102));
+        appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"7/30/2026", "2:30pm", "Jessi", "44 Red Dr."},
                 {"9/1/2026", "10:00am", "Jack", "356 Hayward"},
@@ -218,33 +221,33 @@ public class TabBarsPage extends javax.swing.JFrame {
                 "Date", "Time", "Doctor", "Address"
             }
         ));
-        jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane5.setViewportView(jTable2);
+        appointmentsTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane5.setViewportView(appointmentsTable);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout appointmentMainLayout = new javax.swing.GroupLayout(appointmentMain);
+        appointmentMain.setLayout(appointmentMainLayout);
+        appointmentMainLayout.setHorizontalGroup(
+            appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentMainLayout.createSequentialGroup()
+                .addGroup(appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(appointmentMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(upcomintAppointment)
+                            .addGroup(appointmentMainLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentMainLayout.createSequentialGroup()
+                                .addGroup(appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(appointmentMainLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(searchTextFieldAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(appointmentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel3))
                                     .addComponent(jScrollPane5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(appointmentScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(appointmentMainLayout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(newAppointmnetButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
@@ -254,30 +257,32 @@ public class TabBarsPage extends javax.swing.JFrame {
                         .addGap(45, 45, 45)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        appointmentMainLayout.setVerticalGroup(
+            appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentMainLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(upcomintAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchTextFieldAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(appointmentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                    .addGroup(appointmentMainLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(appointmentScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(appointmentMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newAppointmnetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
-        jTabbedPane4.addTab("Appointments", jPanel2);
+        jTabbedPane4.addTab("Appointments", appointmentMain);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -509,14 +514,10 @@ public class TabBarsPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void newAppointmnetButton(java.awt.event.ActionEvent evt){
-        NewAppointment newAppointment = new NewAppointment();
-        newAppointment.setVisible(true);
-        this.dispose();
-    }
+
     
     private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentButtonActionPerformed
-        // TODO add your handling code here:
+
         EditAppointment edit = new EditAppointment();
         edit.setVisible(true);
         this.dispose();
@@ -548,6 +549,33 @@ public class TabBarsPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableTreatmentsMouseClicked
 
+    private void newAppointmnetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAppointmnetButtonActionPerformed
+        AddAppointment add = new AddAppointment();
+        add.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_newAppointmnetButtonActionPerformed
+
+    private void deleteAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAppointmentButtonActionPerformed
+           int d = JOptionPane.showConfirmDialog(
+                   null,
+                   "Do you really want to delete this appointment?",
+                   "Delete" ,
+                   JOptionPane.YES_NO_OPTION);
+           if ( d == JOptionPane.YES_OPTION){
+               int inform = JOptionPane.showConfirmDialog(
+                    null,
+                    "Appointment deleted.",
+                    "Delele",
+                    JOptionPane.CLOSED_OPTION);
+               System.out.println("Appointment deleted.");
+           } else{
+                TabBarsPage tp;
+                tp = new TabBarsPage();
+                tp.setVisible(true);
+                this.dispose();
+           }
+    }//GEN-LAST:event_deleteAppointmentButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -574,6 +602,10 @@ public class TabBarsPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel appointmentMain;
+    private javax.swing.JScrollBar appointmentScrollBar1;
+    private javax.swing.JTextField appointmentSearch;
+    private javax.swing.JTable appointmentsTable;
     private javax.swing.JButton deleteAppointmentButton;
     private javax.swing.JButton editAppointmentButton;
     private javax.swing.JTextArea firstComingAppointment;
@@ -590,14 +622,11 @@ public class TabBarsPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JScrollBar jScrollBar3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -605,13 +634,12 @@ public class TabBarsPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTableTreatments;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
     private javax.swing.JButton newAppointmnetButton;
-    private javax.swing.JTextField searchTextFieldAppointment;
+    private javax.swing.JScrollPane upcomintAppointment;
     // End of variables declaration//GEN-END:variables
 }
