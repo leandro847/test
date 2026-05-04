@@ -4,6 +4,11 @@
  */
 package gui;
 import healthtracker.*;
+import healthtracker.Doctor;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 /**
  *
  * @author dinhtran
@@ -30,21 +35,19 @@ public class EditAppointment extends javax.swing.JFrame {
 
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        editAppointmentButton = new javax.swing.JButton();
-        newAppointmnetButton = new javax.swing.JButton();
+        backToAppointmentButton = new javax.swing.JButton();
+        updateAppointmnetButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jEditorPane2 = new javax.swing.JEditorPane();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jEditorPane3 = new javax.swing.JEditorPane();
+        doctor = new javax.swing.JEditorPane();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jEditorPane4 = new javax.swing.JEditorPane();
+        address = new javax.swing.JEditorPane();
+        date = new javax.swing.JFormattedTextField();
+        time = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -58,15 +61,16 @@ public class EditAppointment extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(800, 470));
 
-        editAppointmentButton.setForeground(new java.awt.Color(102, 102, 102));
-        editAppointmentButton.setText("Back to Appointment");
-        editAppointmentButton.setMaximumSize(new java.awt.Dimension(140, 25));
-        editAppointmentButton.addActionListener(this::editAppointmentButtonActionPerformed);
+        backToAppointmentButton.setForeground(new java.awt.Color(102, 102, 102));
+        backToAppointmentButton.setText("Back to Appointment");
+        backToAppointmentButton.setMaximumSize(new java.awt.Dimension(140, 25));
+        backToAppointmentButton.addActionListener(this::backToAppointmentButtonActionPerformed);
 
-        newAppointmnetButton.setForeground(new java.awt.Color(102, 102, 102));
-        newAppointmnetButton.setText("Update Appointment");
-        newAppointmnetButton.setMaximumSize(new java.awt.Dimension(140, 25));
-        newAppointmnetButton.setPreferredSize(new java.awt.Dimension(140, 25));
+        updateAppointmnetButton.setForeground(new java.awt.Color(102, 102, 102));
+        updateAppointmnetButton.setText("Update Appointment");
+        updateAppointmnetButton.setMaximumSize(new java.awt.Dimension(140, 25));
+        updateAppointmnetButton.setPreferredSize(new java.awt.Dimension(140, 25));
+        updateAppointmnetButton.addActionListener(this::updateAppointmnetButtonActionPerformed);
 
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Edit Appointment:");
@@ -83,13 +87,21 @@ public class EditAppointment extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Address:");
 
-        jScrollPane1.setViewportView(jEditorPane1);
+        jScrollPane1.setViewportView(doctor);
 
-        jScrollPane5.setViewportView(jEditorPane2);
+        jScrollPane9.setViewportView(address);
 
-        jScrollPane8.setViewportView(jEditorPane3);
+        try {
+            date.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
-        jScrollPane9.setViewportView(jEditorPane4);
+        try {
+            time.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -97,9 +109,9 @@ public class EditAppointment extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(157, 157, 157)
-                .addComponent(newAppointmnetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(updateAppointmnetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(backToAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(149, 149, 149))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
@@ -112,11 +124,11 @@ public class EditAppointment extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel6)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                            .addComponent(date)
+                            .addComponent(time))
                         .addGap(26, 26, 26))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -128,28 +140,28 @@ public class EditAppointment extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 175, Short.MAX_VALUE)
+                        .addGap(0, 164, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(newAppointmnetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(editAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(updateAppointmnetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(backToAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -203,13 +215,50 @@ public class EditAppointment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentButtonActionPerformed
+    private void backToAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToAppointmentButtonActionPerformed
 
         TabBarsPage tp;
         tp = new TabBarsPage();
         tp.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_editAppointmentButtonActionPerformed
+    }//GEN-LAST:event_backToAppointmentButtonActionPerformed
+
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    AppointmentDataSource appointmentDataSource;
+    
+    private void updateAppointmnetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppointmnetButtonActionPerformed
+        String docName = doctor.getText().trim();
+        String adr = address.getText().trim();
+        String dateInput = date.getText().trim();
+        String timeInput = time.getText().trim();
+        
+        LocalDate aptDate;
+        LocalTime aptTime;
+        
+        try{
+            aptDate = LocalDate.parse(dateInput, dateFormatter);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Invalid date format (dd/MM/yyyy)");
+            return;
+       
+        }
+        
+        try{
+            aptTime = LocalTime.parse(timeInput, timeFormatter);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Invalid time.");
+            return;
+        }
+                
+//        appointmentDataSource.getAptAtIndex(.....) = new Appointment(new Doctor(docName, adr), aptDate, aptTime);        
+        
+        TabBarsPage tp;
+        tp = new TabBarsPage();
+        tp.setVisible(true);
+        this.dispose();        
+        
+    }//GEN-LAST:event_updateAppointmnetButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,11 +286,10 @@ public class EditAppointment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton editAppointmentButton;
-    private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JEditorPane jEditorPane2;
-    private javax.swing.JEditorPane jEditorPane3;
-    private javax.swing.JEditorPane jEditorPane4;
+    private javax.swing.JEditorPane address;
+    private javax.swing.JButton backToAppointmentButton;
+    private javax.swing.JFormattedTextField date;
+    private javax.swing.JEditorPane doctor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -251,10 +299,9 @@ public class EditAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JButton newAppointmnetButton;
+    private javax.swing.JFormattedTextField time;
+    private javax.swing.JButton updateAppointmnetButton;
     // End of variables declaration//GEN-END:variables
 }
