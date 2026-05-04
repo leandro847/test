@@ -133,50 +133,54 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="upcomintAppointment" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="newAppointmnetButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                                      <Component id="editAppointmentButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                                      <Component id="deleteAppointmentButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="39" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" attributes="0">
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               <Component id="appointmentSearch" min="-2" pref="96" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane5" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane8" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="appointmentScrollBar1" min="-2" pref="10" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="appointmentScrollBar1" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="newAppointmnetButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="153" max="32767" attributes="0"/>
-                              <Component id="editAppointmentButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                              <Component id="deleteAppointmentButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane9" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="upcomintAppointment" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane9" min="-2" pref="86" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="appointmentSearch" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -184,11 +188,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane5" pref="194" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
                               <Component id="appointmentScrollBar1" min="-2" pref="175" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane8" pref="194" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -202,33 +206,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="upcomintAppointment">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTextArea" name="firstComingAppointment">
-                  <Properties>
-                    <Property name="columns" type="int" value="20"/>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="33" red="33" type="rgb"/>
-                    </Property>
-                    <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Date: &#x9;8/12/2026&#xa;Time: &#x9;1:00pm&#xa;Doctor:&#x9;Timothy&#xa;Address:&#x9;123 Vegas Ave., Milpitas, CA, 95035"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="66" red="66" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Upcoming appointment:"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="editAppointmentButton">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -288,10 +265,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newAppointmnetButtonActionPerformed"/>
               </Events>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane5">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
@@ -301,35 +280,11 @@
                       <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="5">
-                        <Column editable="true" title="Date" type="java.lang.Object">
-                          <Data value="7/30/2026"/>
-                          <Data value="9/1/2026"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="true" title="Time" type="java.lang.Object">
-                          <Data value="2:30pm"/>
-                          <Data value="10:00am"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="true" title="Doctor" type="java.lang.Object">
-                          <Data value="Jessi"/>
-                          <Data value="Jack"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="true" title="Address" type="java.lang.Object">
-                          <Data value="44 Red Dr."/>
-                          <Data value="356 Hayward"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
+                      <Table columnCount="4" rowCount="1">
+                        <Column editable="false" title="Date" type="java.lang.Object"/>
+                        <Column editable="false" title="Time" type="java.lang.Object"/>
+                        <Column editable="false" title="Doctor" type="java.lang.Object"/>
+                        <Column editable="false" title="Address" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -362,6 +317,29 @@
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Upcoming Appointment"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane9">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="upcomingAptTextArea">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -646,6 +624,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                     <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
