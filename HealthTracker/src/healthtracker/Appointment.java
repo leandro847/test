@@ -25,8 +25,8 @@ package healthtracker;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import HealthReminder.*;
 
 public class Appointment {
     private Doctor doctor;
