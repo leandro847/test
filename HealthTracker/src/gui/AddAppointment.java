@@ -8,11 +8,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import HealthReminder.*;
 
 
 /**
  *
- * @author dinhtran
+ * @author tamnguyen
  */
 public class AddAppointment extends javax.swing.JFrame {
     
@@ -226,9 +227,7 @@ public class AddAppointment extends javax.swing.JFrame {
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     
     private void backToNavigationPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToNavigationPageActionPerformed
-        TabBarsPage tp;
-        tp = new TabBarsPage();
-        tp.setVisible(true);
+        homepage.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backToNavigationPageActionPerformed
   
@@ -261,15 +260,11 @@ public class AddAppointment extends javax.swing.JFrame {
         Appointment newApt = new Appointment(new Doctor(docName, adr), aptDate, aptTime);
 
         appointmentDataSource.add(newApt);
-        
         homepage.refreshPage();
         homepage.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addAppointmnetButtonActionPerformed
-
-    
-    
-    
+        
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
 
     }//GEN-LAST:event_dateActionPerformed

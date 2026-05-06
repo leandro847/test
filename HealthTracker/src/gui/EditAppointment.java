@@ -4,14 +4,15 @@
  */
 package gui;
 import healthtracker.*;
-import healthtracker.Doctor;
+import HealthReminder.*;
+import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 /**
  *
- * @author dinhtran
+ * @author tamnguyen
  */
 public class EditAppointment extends javax.swing.JFrame {
     
@@ -19,9 +20,24 @@ public class EditAppointment extends javax.swing.JFrame {
 
     /**
      * Creates new form EditAppointment
+     * @param homepage
+     * @param ds
+     * @param selectedIndex
      */
-    public EditAppointment() {
+    public EditAppointment(TabBarsPage homepage, AppointmentDataSource ds, int selectedIndex) {
+        appointmentDataSource = ds;
+        this.homepage = homepage;
+        this.selectedIndex = selectedIndex;
         initComponents();
+    }
+    
+    AppointmentDataSource appointmentDataSource;
+    TabBarsPage homepage;
+    int selectedIndex;
+//    Appointment selectedApt = appointmentDataSource.getAptAtIndex(selectedIndex);
+
+    private EditAppointment() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -216,47 +232,55 @@ public class EditAppointment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backToAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToAppointmentButtonActionPerformed
-
-        TabBarsPage tp;
-        tp = new TabBarsPage();
-        tp.setVisible(true);
+        homepage.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backToAppointmentButtonActionPerformed
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-    AppointmentDataSource appointmentDataSource;
+    
+    public void setDataFields(){
+        Appointment selectedApt = appointmentDataSource.getAptAtIndex(selectedIndex);
+        date.setValue(selectedApt.getDate().format(dateFormatter));
+        time.setValue(selectedApt.getTime().format(timeFormatter));
+        doctor.setText(selectedApt.getDoctor().getName());
+        address.setText(selectedApt.getDoctor().getAddress());
+    }
     
     private void updateAppointmnetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppointmnetButtonActionPerformed
-        String docName = doctor.getText().trim();
-        String adr = address.getText().trim();
-        String dateInput = date.getText().trim();
-        String timeInput = time.getText().trim();
-        
-        LocalDate aptDate;
-        LocalTime aptTime;
-        
         try{
-            aptDate = LocalDate.parse(dateInput, dateFormatter);
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Invalid date format (dd/MM/yyyy)");
-            return;
+            String docName = doctor.getText().trim();
+            String adr = address.getText().trim();
+            String dateInput = date.getText().trim();
+            String timeInput = time.getText().trim();
+        
+            LocalDate aptDate;
+            LocalTime aptTime;
+        
+            try{
+                aptDate = LocalDate.parse(dateInput, dateFormatter);
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Invalid date format (dd/MM/yyyy)");
+                return;
        
-        }
+            }
         
-        try{
-            aptTime = LocalTime.parse(timeInput, timeFormatter);
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Invalid time.");
-            return;
-        }
-                
-//        appointmentDataSource.getAptAtIndex(.....) = new Appointment(new Doctor(docName, adr), aptDate, aptTime);        
+            try{
+                aptTime = LocalTime.parse(timeInput, timeFormatter);
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Invalid time.");
+                return;
+            }
         
-        TabBarsPage tp;
-        tp = new TabBarsPage();
-        tp.setVisible(true);
-        this.dispose();        
+            Doctor doc = new Doctor(docName, adr);
+            appointmentDataSource.update(selectedIndex, new Appointment (doc, aptDate, aptTime));          
+            homepage.refreshPage();
+            homepage.setVisible(true);
+            this.dispose(); 
+        }catch(HeadlessException e){
+            JOptionPane.showMessageDialog(this, "Error!");
+        }
+               
         
     }//GEN-LAST:event_updateAppointmnetButtonActionPerformed
 
