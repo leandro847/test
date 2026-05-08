@@ -60,14 +60,19 @@ public class ProfilePanel extends javax.swing.JPanel {
     
     private void buildLayout() {
         gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 20, 4, 10);
+        gbc.insets = new Insets(2, 5, 2, 5); // small padding
         gbc.anchor = GridBagConstraints.WEST;
-        
-        add(title, gbc); // add title separate because of formating
+        gbc.fill = GridBagConstraints.NONE;
+
+        // Title spanning both columns
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        add(title, gbc);
+        gbc.gridwidth = 1; // reset
+
         addRow("ID:",    valID,    tfID,    gbc, 1);
         addRow("Name:",  valName,  tfName,  gbc, 2);
         addRow("Email:", valEmail, tfEmail, gbc, 3);
-        
+
         gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
     }
     
@@ -174,7 +179,6 @@ public class ProfilePanel extends javax.swing.JPanel {
         
         gbc.gridx = 1;
         add(val, gbc);
-        
         add(tf, gbc);
     }
     
