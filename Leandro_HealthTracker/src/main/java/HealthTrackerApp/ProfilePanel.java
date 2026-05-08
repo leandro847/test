@@ -11,115 +11,42 @@ import java.util.function.Consumer;
 
 public class ProfilePanel extends javax.swing.JPanel {
 
-    private JTextField tfID, tfName, tfUsername, tfEmail, tfPhone;
-    private JLabel valID, valName, valUsername, valEmail, valPhone;
+    private JTextField tfID, tfName, tfEmail;
+    private JLabel title, valID, valName, valEmail;
     private JButton btnMail, btnLogout, btnEdit, btnSave, btnCancel;
-    private User user;
+    private final User user;
+    private final Consumer<String> navigator;
+    private GridBagConstraints gbc;
 
+    
     public ProfilePanel(Consumer<String> navigator, User user) {
         this.user = user;
-        initComponents();
-        setupComponents(navigator);
+        this.navigator = navigator;
+        setupComponents();
     }
 
-    private void setupComponents(Consumer<String> navigator) {
+    
+    private void setupComponents() {
+        // clear
         removeAll();
+        
+        // set style
         setLayout(new GridBagLayout());
         setBackground(new Color(240, 240, 240));
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 20, 4, 10);
-        gbc.anchor = GridBagConstraints.WEST;
+        // build ui
+        buildTextFields();
+        buildButtons();
+        buildLayout();
+        buildButtonMenu();
 
-        // Title
-        JLabel title = new JLabel("Profile Page");
-        title.setForeground(new Color(180, 50, 50));
-        title.setFont(new Font("SansSerif", Font.PLAIN, 20));
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
-        add(title, gbc);
-        gbc.gridwidth = 1;
+        // populate panel
+        revalidate();
+        repaint();
+    }
 
-        // Labels
-        valID       = new JLabel(String.valueOf(user.userID));
-        valName     = new JLabel(user.name);
-        valEmail    = new JLabel(user.email);
-
-        // Text fields (hidden initially)
-        tfID     = new JTextField(String.valueOf(user.userID), 15);
-        tfName     = new JTextField(user.name, 15);
-        tfEmail    = new JTextField(user.email, 15);
-
-        tfID.setVisible(false);
-        tfName.setVisible(false);
-        //tfUsername.setVisible(false);
-        tfEmail.setVisible(false);
-        //tfPhone.setVisible(false);
-
-        addRow("ID:",     valID,     tfID,     gbc, 1);
-        addRow("Name:",     valName,     tfName,     gbc, 2);
-        //addRow("Username:", valUsername, tfUsername, gbc, 2);
-        addRow("Email:",    valEmail,    tfEmail,    gbc, 3);
-        //addRow("Phone:",    valPhone,    tfPhone,    gbc, 4);
-
-        // Buttons
-        btnMail = new JButton("Go to Mail");
-        btnLogout = new JButton("logout");
-        btnEdit = new JButton("Edit");
-        btnSave = new JButton("Save");
-        btnCancel = new JButton("Cancel");
-
-        btnSave.setVisible(false);
-        btnCancel.setVisible(false);
-        
-        btnMail.addActionListener(e -> {
-            navigator.accept("mail");
-            tfID.setText(valID.getText());
-            tfName.setText(valName.getText());
-            //tfUsername.setText(valUsername.getText());
-            tfEmail.setText(valEmail.getText());
-            //tfPhone.setText(valPhone.getText());
-            setEditing(false);
-        });
-        
-        btnLogout.addActionListener(e -> {
-            navigator.accept("login");
-            // reset fields back to current label values
-            tfID.setText(valID.getText());
-            tfName.setText(valName.getText());
-            //tfUsername.setText(valUsername.getText());
-            tfEmail.setText(valEmail.getText());
-            //tfPhone.setText(valPhone.getText());
-            setEditing(false);
-        });
-
-        
-        // Edit clicked — show text fields
-        btnEdit.addActionListener(e -> {
-            setEditing(true);
-        });
-
-        // Cancel clicked — revert
-        btnCancel.addActionListener(e -> {
-            // reset fields back to current label values
-            tfID.setText(valID.getText());
-            tfName.setText(valName.getText());
-            //tfUsername.setText(valUsername.getText());
-            tfEmail.setText(valEmail.getText());
-            //tfPhone.setText(valPhone.getText());
-            setEditing(false);
-        });
-
-        // Save clicked — update labels
-        btnSave.addActionListener(e -> {
-            valID.setText(tfID.getText());
-            valName.setText(tfName.getText());
-            //valUsername.setText(tfUsername.getText());
-            valEmail.setText(tfEmail.getText());
-            //valPhone.setText(tfPhone.getText());
-            setEditing(false);
-        });
-
-        gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
+    
+    private void buildButtonMenu() {
         JPanel bottom = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         bottom.setBackground(new Color(240, 240, 240));
         bottom.add(btnMail);
@@ -128,25 +55,105 @@ public class ProfilePanel extends javax.swing.JPanel {
         bottom.add(btnSave);
         bottom.add(btnCancel);
         add(bottom, gbc);
-
-        revalidate();
-        repaint();
     }
+    
+    
+    private void buildLayout() {
+        gbc = new GridBagConstraints();
+        gbc.insets = new Insets(8, 20, 4, 10);
+        gbc.anchor = GridBagConstraints.WEST;
+        
+        add(title, gbc); // add title separate because of formating
+        addRow("ID:",    valID,    tfID,    gbc, 1);
+        addRow("Name:",  valName,  tfName,  gbc, 2);
+        addRow("Email:", valEmail, tfEmail, gbc, 3);
+        
+        gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
+    }
+    
+    
+    private void buildTextFields() {
+        title = new JLabel("Profile Page");
+        title.setForeground(new Color(180, 50, 50));
+        title.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        
+        valID    = new JLabel(String.valueOf(user.userID));
+        valName  = new JLabel(user.name);
+        valEmail = new JLabel(user.email);
 
+        tfID    = new JTextField(String.valueOf(user.userID), 15);
+        tfName  = new JTextField(user.name, 15);
+        tfEmail = new JTextField(user.email, 15);
+
+        tfID.setVisible(false);
+        tfName.setVisible(false);
+        tfEmail.setVisible(false);
+    }
+    
+    
+    private void buildButtons() {
+        btnMail   = new JButton("Go to Mail");
+        btnLogout = new JButton("logout");
+        btnEdit   = new JButton("Edit");
+        btnSave   = new JButton("Save");
+        btnCancel = new JButton("Cancel");
+        
+        btnSave.setVisible(false);
+        btnCancel.setVisible(false);
+        
+        btnMail.addActionListener(e -> {
+            navigator.accept("mail"); // go to mail summary
+            cancelChanges(); // in case user is editing when go to mail pressed
+        });
+        
+        btnLogout.addActionListener(e -> {
+            navigator.accept("login"); // go to login page
+            cancelChanges(); // in case user is editing when logout pressed
+        });
+        
+        btnEdit.addActionListener(e -> {setEditing(true);});
+        btnCancel.addActionListener(e -> {cancelChanges();});
+        btnSave.addActionListener(e -> {saveChanges();});
+    }
+    
+    
+    private void saveChanges() {
+        // update user info
+        user.userID = Integer.parseInt(tfID.getText());
+        user.name = tfName.getText();
+        user.email = tfEmail.getText();
+        
+        // update display info
+        valID.setText(tfID.getText());
+        valName.setText(tfName.getText());
+        valEmail.setText(tfEmail.getText());
+        setEditing(false);
+    }
+    
+    
+    private void cancelChanges() {
+        // set textfields back to old values
+        tfID.setText(valID.getText());
+        tfName.setText(valName.getText());
+        tfEmail.setText(valEmail.getText());
+        setEditing(false);
+    }
+    
+    
     private void setEditing(boolean editing) {
+        // make values invisible
         valID.setVisible(!editing);
         valName.setVisible(!editing);
-        //valUsername.setVisible(!editing);
         valEmail.setVisible(!editing);
-        //valPhone.setVisible(!editing);
 
+        // make textfields visible
         tfID.setVisible(editing);
         tfName.setVisible(editing);
-        //tfUsername.setVisible(editing);
         tfEmail.setVisible(editing);
-        //tfPhone.setVisible(editing);
 
+        // set edit invisible
         btnEdit.setVisible(!editing);
+        // set save and cancel visible
         btnSave.setVisible(editing);
         btnCancel.setVisible(editing);
 
@@ -154,16 +161,20 @@ public class ProfilePanel extends javax.swing.JPanel {
         repaint();
     }
 
+    
     private void addRow(String labelText, JLabel val, JTextField tf, GridBagConstraints gbc, int row) {
         JLabel key = new JLabel(labelText);
         key.setForeground(new Color(180, 50, 50));
         key.setFont(new Font("SansSerif", Font.PLAIN, 13));
         val.setFont(new Font("SansSerif", Font.PLAIN, 13));
-
-        gbc.gridx = 0; gbc.gridy = row;
+        
+        gbc.gridx = 0; 
+        gbc.gridy = row;
         add(key, gbc);
+        
         gbc.gridx = 1;
         add(val, gbc);
+        
         add(tf, gbc);
     }
     
@@ -187,7 +198,6 @@ public class ProfilePanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

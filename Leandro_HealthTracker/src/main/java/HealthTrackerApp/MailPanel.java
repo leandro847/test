@@ -11,84 +11,105 @@ import java.util.function.Consumer;
 
 public class MailPanel extends javax.swing.JPanel {
 
-    JTextField emailField = new JTextField();
-    JTextArea messageArea = new JTextArea(10, 20);
-    /**
-     * Creates new form MailPanel
-     * @param navigator
-     */
-    public MailPanel(Consumer<String> navigator) {
-        initComponents();
-        setupComponents(navigator);
-    }
+    private JTextField tfEmail;
+    private JTextArea areaMessage;
+    private JLabel lblStatus;
+    private JButton btnProfile, btnSend;
+    private final Consumer<String> navigator;
+
     
-    private void setupComponents(Consumer<String> navigator) {
+    public MailPanel(Consumer<String> navigator) {
+        this.navigator = navigator;
+        setupComponents();
+    }
+
+    
+    private void setupComponents() {
         removeAll();
         setLayout(new BorderLayout());
         setBackground(new Color(240, 240, 240));
+        
+        buildTitle();
+        buildButtons();
+        buildTextAreas();
+        buildButtonMenu();
+        buildCenter();
 
-        // --- NORTH: Title ---
+        revalidate();
+        repaint();
+    }
+
+    
+    private void buildTitle() {
         JLabel title = new JLabel("Mail Summary");
         title.setFont(new Font("SansSerif", Font.BOLD, 16));
         title.setForeground(new Color(180, 50, 50));
         title.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 0));
-        add(title, BorderLayout.NORTH);
+        add(title,  BorderLayout.NORTH);
+    }
 
-        // --- CENTER: Form Fields ---
+    
+    private void buildCenter() {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         centerPanel.setBackground(new Color(240, 240, 240));
 
-        // Receiver Email Field
         centerPanel.add(new JLabel("To:"));
-        emailField = new JTextField();
-        emailField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        centerPanel.add(emailField);
-
+        centerPanel.add(tfEmail);
         centerPanel.add(Box.createVerticalStrut(10));
-
-        // Message Text Area
         centerPanel.add(new JLabel("Message:"));
-        messageArea = new JTextArea(10, 20);
-        messageArea.setLineWrap(true);
-        messageArea.setWrapStyleWord(true);
-        JScrollPane scrollPane = new JScrollPane(messageArea);
-        centerPanel.add(scrollPane);
+        centerPanel.add(new JScrollPane(areaMessage));
+        centerPanel.add(buildStatusLabel());
+
         add(centerPanel, BorderLayout.CENTER);
+    }
 
-        // Message successful label
-        JLabel statusLabel = new JLabel(" "); 
-        statusLabel.setForeground(new Color(0, 150, 0));
-        statusLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        statusLabel.setPreferredSize(new Dimension(300, 25)); 
-        statusLabel.setMinimumSize(new Dimension(300, 25));
-        statusLabel.setMaximumSize(new Dimension(300, 25));
+    
+    private void buildTextAreas() {
+        tfEmail = new JTextField();
+        tfEmail.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        areaMessage = new JTextArea(10, 20);
+        areaMessage.setLineWrap(true);
+        areaMessage.setWrapStyleWord(true);
+    }
 
-        centerPanel.add(statusLabel);
-        
-        // --- SOUTH: Navigation & Actions ---
-        JPanel bottom = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Switched to Right for "Send" style
+    
+    private JLabel buildStatusLabel() {
+        lblStatus = new JLabel(" ");
+        lblStatus.setForeground(new Color(0, 150, 0));
+        lblStatus.setAlignmentX(Component.LEFT_ALIGNMENT);
+        lblStatus.setPreferredSize(new Dimension(300, 25));
+        lblStatus.setMinimumSize(new Dimension(300, 25));
+        lblStatus.setMaximumSize(new Dimension(300, 25));
+        return lblStatus;
+    }
 
-        JButton sendButton = new JButton("Send Mail");
-        sendButton.addActionListener(e -> {
-            emailField.setText("");
-            messageArea.setText("");
-            statusLabel.setText("✔ Message sent successfully!");
-            Timer timer = new Timer(3000, ex -> {statusLabel.setText(" ");});
-            timer.setRepeats(false);
-            timer.start();
-        });
-
-        JButton goToProfile = new JButton("View Profile");
-        goToProfile.addActionListener(e -> navigator.accept("tab bars page"));
-
-        bottom.add(goToProfile);
-        bottom.add(sendButton);
+    
+    private void buildButtonMenu() {
+        JPanel bottom = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottom.add(btnProfile);
+        bottom.add(btnSend);
         add(bottom, BorderLayout.SOUTH);
+    }
+    
+    
+    private void buildButtons() {
+        btnProfile = new JButton("View Profile");
+        btnSend = new JButton("Send Mail");
+        
+        btnProfile.addActionListener(e -> navigator.accept("tab bars page"));
+        btnSend.addActionListener(e -> sendMail());
+    }
 
-        revalidate();
-        repaint();
+    
+    private void sendMail() {
+        tfEmail.setText("");
+        areaMessage.setText("");
+        lblStatus.setText("✔ Message sent successfully!");
+        Timer timer = new Timer(3000, e -> lblStatus.setText(" "));
+        timer.setRepeats(false);
+        timer.start();
     }
 
     /**
