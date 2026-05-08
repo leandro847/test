@@ -17,8 +17,8 @@ public class Doctor {
         this.email = email;
         this.address = address;
     }
-    
-    public Doctor(String name, String address){
+
+    public Doctor ( String name, String address){
         this.name = name;
         this.address = address;
     }
