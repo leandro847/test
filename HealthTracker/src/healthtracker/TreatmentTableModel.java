@@ -46,6 +46,11 @@ public class TreatmentTableModel extends AbstractTableModel {
         }
     }
     
+    
+    public String getColumnName(int col){
+        return columns[col];
+    }
+    
     public Treatment getTreatment(int row){
         return treatments.get(row);
     }

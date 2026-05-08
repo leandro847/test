@@ -60,7 +60,7 @@ public class Treatment {
         this.purpose = purpose;
     }    
     
-    
+       
     /**
      * Notes about the Treatment.
      * @return String notes
