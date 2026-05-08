@@ -64,10 +64,9 @@ public class ProfilePanel extends javax.swing.JPanel {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.NONE;
 
-        // Title spanning both columns
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
         add(title, gbc);
-        gbc.gridwidth = 1; // reset
+        gbc.gridwidth = 1;
 
         addRow("ID:",    valID,    tfID,    gbc, 1);
         addRow("Name:",  valName,  tfName,  gbc, 2);
