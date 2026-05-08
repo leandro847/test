@@ -60,7 +60,7 @@ public class ProfilePanel extends javax.swing.JPanel {
     
     private void buildLayout() {
         gbc = new GridBagConstraints();
-        gbc.insets = new Insets(2, 5, 2, 5); // small padding
+        gbc.insets = new Insets(4, 10, 4, 10); // small padding
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.NONE;
 
