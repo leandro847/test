@@ -110,7 +110,7 @@ public class TabBarsPagePanel extends javax.swing.JPanel {
  
         // getWindowAncestor returns the parent window; cast to Frame for the dialog owner
         java.awt.Frame parentFrame = (java.awt.Frame) SwingUtilities.getWindowAncestor(this);
-        EditTreatment dialog = new EditTreatment(parentFrame, true, origTreatment);
+        EditTreatment dialog = new EditTreatment(parentFrame, true, origTreatment, false);
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
         if (dialog.isConfirmed()) {

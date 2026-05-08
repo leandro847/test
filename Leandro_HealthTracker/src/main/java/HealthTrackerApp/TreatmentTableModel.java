@@ -24,8 +24,8 @@ public class TreatmentTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col){
         Treatment t = treatments.get(row);
-        if(t instanceof Medication medication){  //this is a little janky, but not sure what else to do
-            Medication m = medication;
+        if(t instanceof Medication){  //this is a little janky, but not sure what else to do
+            Medication m = (Medication)t;
             return switch(col){
                 case 0 -> m.getName();
                 case 1 -> m.getDose();
@@ -44,6 +44,11 @@ public class TreatmentTableModel extends AbstractTableModel {
                 default -> null;
             };
         }
+    }
+    
+    
+    public String getColumnName(int col){
+        return columns[col];
     }
     
     public Treatment getTreatment(int row){

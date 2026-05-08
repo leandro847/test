@@ -29,7 +29,6 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().removeAll(); // add this line first
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Profile");
-        setSize(600, 400);
         setLayout(new BorderLayout());
         user = new User(1, "Alex", "alex@gmail.com");
         
@@ -39,7 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
         mail = new MailPanel(this::showCard);
         editAppointment = new EditAppointmentPanel(this::showCard);
         addAppointment = new AddAppointmentPanel(new AppointmentDataSource(), this::showCard);
-        doctors = new DoctorPanel(this::showCard);
+        doctors = new DoctorPanel();
         tabBars = new TabBarsPagePanel(this::showCard, profile, doctors);
 
         mainPanel = new JPanel(new CardLayout());
@@ -52,7 +51,6 @@ public class MainFrame extends javax.swing.JFrame {
         add(mainPanel, BorderLayout.CENTER);
 
         pack();
-        setSize(1000, 600);
     }
 
     private void showCard(String name) {

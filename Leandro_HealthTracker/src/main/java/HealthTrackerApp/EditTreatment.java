@@ -12,26 +12,35 @@ package HealthTrackerApp;
 public class EditTreatment extends javax.swing.JDialog {
     private boolean isConfirmed = false;
     private boolean isDelete = false;
+    private boolean isNew;
     
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditTreatment.class.getName());
 
     /**
      * Creates new form EditTreatment
-     * @param parent
-     * @param modal
-     * @param treatment
      */
-    public EditTreatment(java.awt.Frame parent, boolean modal, Treatment treatment) {
+    public EditTreatment(java.awt.Frame parent, boolean modal, Treatment treatment, boolean add) {
         super(parent, modal);
         initComponents();
+        this.isNew = add;
         
-        nameTF.setText(treatment.getName());
-        notesTF.setText(treatment.getNotes());
-        purposeTF.setText(treatment.getPurpose());
-        freqTF.setText(treatment.getFrequency());
-        if(treatment instanceof Medication medication){
-            doseTF.setText(medication.getDose());
+        
+        if(isNew){
+            nameTF.setText("");
+            notesTF.setText("");
+            purposeTF.setText("");
+            freqTF.setText("");
+            doseTF.setText("");
         } else {
-            doseTF.setText("N/A");
+            nameTF.setText(treatment.getName());
+            notesTF.setText(treatment.getNotes());
+            purposeTF.setText(treatment.getPurpose());
+            freqTF.setText(treatment.getFrequency());
+            if(treatment instanceof Medication){
+                doseTF.setText(((Medication) treatment).getDose());
+            } else {
+                doseTF.setText("N/A");
+            }
         }
     }
     
@@ -39,11 +48,13 @@ public class EditTreatment extends javax.swing.JDialog {
     
     public boolean isDelete(){return isDelete;}
     
+    public boolean isNew(){return isNew;}
+    
     public Treatment getTreatment(){
         Treatment myTreatment;
         //determine if this is a treatment, or a medication
         String dose = doseTF.getText();
-        if(dose != null && (dose.equalsIgnoreCase("n/a") || dose.equals(""))){//medication
+        if(dose != null && !(dose.equalsIgnoreCase("n/a") || dose.equals(""))){//medication
             myTreatment = new Medication(0,0,nameTF.getText(),notesTF.getText(), purposeTF.getText(), freqTF.getText(), dose, 0 );
         } else {//treatment
             myTreatment = new Treatment(0,0,nameTF.getText(),notesTF.getText(), purposeTF.getText(), freqTF.getText());
@@ -77,12 +88,13 @@ public class EditTreatment extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Treatment");
 
         nameLabel.setText("Treatment Name:");
 
         doseLabel.setText("Dose:");
 
-        freqLabel.setText("Frequency (in hours):");
+        freqLabel.setText("Frequency:");
 
         purposeLabel.setText("Purpose:");
 
@@ -103,25 +115,20 @@ public class EditTreatment extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(freqLabel)
+                        .addGap(9, 9, 9)
+                        .addComponent(freqTF, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nameLabel)
+                            .addComponent(doseLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(nameLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(nameTF, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(64, 64, 64)
-                                        .addComponent(doseLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(doseTF))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(freqLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(freqTF))))
+                            .addComponent(doseTF)
+                            .addComponent(nameTF)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

@@ -1,12 +1,12 @@
-package HealthTrackerApp;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package HealthTrackerApp;
 
 /**
  *
- * @author dinhtran
+ * @author tamnguyen
  */
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.Comparator;
 
 public class AppointmentDataSource {
     
-    private ArrayList<Appointment> appointmentDataSource;
+    private ArrayList<Appointment> appointmentList;
     private boolean inserted = false;
     
     public AppointmentDataSource() {
-        appointmentDataSource = loadAppointments();
+        appointmentList = loadAppointments();
     }
     
     private ArrayList<Appointment> loadAppointments() {
@@ -43,41 +43,45 @@ public class AppointmentDataSource {
         apts.add(apt3);
         apts.add(apt4);
         
-        apts.sort(Comparator.comparing(Appointment::getDate));
+        sortApts(apts);
         return apts;
 
     }
     
+    private void sortApts(ArrayList<Appointment> a){
+        a.sort(Comparator.comparing(Appointment::getDate));
+    }
+    
     public ArrayList<Appointment> getAppointments(){
-        return appointmentDataSource;
+        return appointmentList;
+    }
+    
+    public Appointment getAptAtIndex(int index){
+        return appointmentList.get(index);
     }
     
     public Appointment getUpcomingApt(){
-        return appointmentDataSource.get(0);
+        return appointmentList.get(0);
+    }
+    
+    public boolean isEmpty(){
+        return appointmentList.isEmpty();
     }
     
     public ArrayList<Appointment> add(Appointment apt){
-        if (appointmentDataSource.isEmpty()){
-            appointmentDataSource.add(apt);
-        } else {
-            for (int n = 0; n < appointmentDataSource.size(); n++){
-                if (apt.getDate().isBefore(appointmentDataSource.get(n).getDate())){
-                    appointmentDataSource.add(n, apt);
-                    inserted = true;
-                    break;
-                } else
-                    inserted = false;
-            }
-            if (inserted)
-                appointmentDataSource.add(apt);
-        }
-        return appointmentDataSource;
+        appointmentList.add(apt);
+        sortApts(appointmentList);
+        return appointmentList;
     }
     
+    public void update(int index, Appointment a){
+        appointmentList.set(index, a);
+        sortApts(appointmentList);    
+    }
             
     public ArrayList<Appointment> delete(int index){
-        appointmentDataSource.remove(index);
-        return appointmentDataSource;
+        appointmentList.remove(index);
+        return appointmentList;
     }
     
 }

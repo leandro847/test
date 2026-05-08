@@ -14,130 +14,128 @@ import java.util.function.Consumer;
  *
  * @author Leandropc
  */
-public class DoctorPanel extends javax.swing.JPanel {
+public class DoctorPanel extends JPanel {
+    private DoctorManager manager;
 
-    private DoctorManager manager = new DoctorManager();
+    private JTable table;
+    private DefaultTableModel model;
+    private JTextField idField;
+    private JTextField nameField;
+    private JTextField specialtyField;
+    private JTextField phoneField;
+    private JTextField emailField;
+    private JTextField addressField;
 
-    private JTable generalTable, personalTable;
-    private DefaultTableModel generalModel, personalModel;
+    public DoctorPanel(){
+        manager = new DoctorManager();
+        setLayout( new BorderLayout());
 
-    private JTextField nameField, specialtyField, phoneField, emailField, addressField;
-    /**
-     * Creates new form DoctorPanel
-     * @param navigator
-     */
-    public DoctorPanel(Consumer<String> navigator) {
-        initComponents();
-        setupComponents(navigator);
-    }
-    
-    private void setupComponents(Consumer<String> navigator) {
-        setLayout(new BorderLayout());
+        String[] columns = {"ID", "Name", "Specialty",
+        "Phone", "Email", "Address"};
 
-        String[] columns = {"ID", "Name", "Specialty", "Phone", "Email", "Address"};
+        model = new DefaultTableModel( columns, 0);
+        table = new JTable( model);
+        JScrollPane scrollPane = new JScrollPane( table);
+        add( scrollPane, BorderLayout.CENTER);
 
-        generalModel = new DefaultTableModel(columns, 0);
-        personalModel = new DefaultTableModel(columns, 0);
-
-        generalTable = new JTable(generalModel);
-        personalTable = new JTable(personalModel);
-
-        JSplitPane splitPane = new JSplitPane(
-                JSplitPane.HORIZONTAL_SPLIT,
-                new JScrollPane(generalTable),
-                new JScrollPane(personalTable)
-        );
-
-        add(splitPane, BorderLayout.CENTER);
-
-        JPanel inputPanel = new JPanel(new GridLayout(5, 2));
-
+        JPanel formPanel = new JPanel( new GridLayout( 6, 2));
+        idField = new JTextField();
         nameField = new JTextField();
         specialtyField = new JTextField();
         phoneField = new JTextField();
         emailField = new JTextField();
         addressField = new JTextField();
 
-        inputPanel.add(new JLabel("Name"));
-        inputPanel.add(nameField);
-        inputPanel.add(new JLabel("Specialty"));
-        inputPanel.add(specialtyField);
-        inputPanel.add(new JLabel("Phone"));
-        inputPanel.add(phoneField);
-        inputPanel.add(new JLabel("Email"));
-        inputPanel.add(emailField);
-        inputPanel.add(new JLabel("Address"));
-        inputPanel.add(addressField);
+        formPanel.add( new JLabel("ID"));
+        formPanel.add(idField);
+        formPanel.add( new JLabel("Name"));
+        formPanel.add(nameField);
+        formPanel.add( new JLabel("Specialty"));
+        formPanel.add(specialtyField);
+        formPanel.add( new JLabel("Phone"));
+        formPanel.add(phoneField);
+        formPanel.add( new JLabel("Email"));
+        formPanel.add(emailField);
+        formPanel.add( new JLabel("Address"));
+        formPanel.add(addressField);
+        add( formPanel, BorderLayout.NORTH);
 
-        add(inputPanel, BorderLayout.NORTH);
-
-        JPanel btnPanel = new JPanel();
-
+        JPanel buttonPanel = new JPanel();
         JButton addBtn = new JButton("Add");
         JButton editBtn = new JButton("Edit");
         JButton deleteBtn = new JButton("Delete");
+        buttonPanel.add(addBtn);
+        buttonPanel.add(editBtn);
+        buttonPanel.add(deleteBtn);
+        add( buttonPanel, BorderLayout.SOUTH);
 
-        btnPanel.add(addBtn);
-        btnPanel.add(editBtn);
-        btnPanel.add(deleteBtn);
+        loadTable();
 
-        add(btnPanel, BorderLayout.SOUTH);
-
-        loadTable(generalModel, manager.getGeneralList());
-        loadTable(personalModel, manager.getPersonalList());
-
-        addBtn.addActionListener(a1 -> {
-            int row = generalTable.getSelectedRow();
-            if (row >= 0) {
-                int id = (int) generalModel.getValueAt(row, 0);
-                for (Doctor d : manager.getGeneralList()) {
-                    if (d.getDoctorID() == id) {
-                        manager.addToPersonal(d);
-                        break;
-                    }
-                }
-                loadTable(personalModel, manager.getPersonalList());
+        table.getSelectionModel().addListSelectionListener( e -> {
+            int row = table.getSelectedRow();
+            if ( row >= 0){
+                idField.setText( model.getValueAt( row, 0).toString());
+                nameField.setText( model.getValueAt( row, 1).toString());
+                specialtyField.setText( model.getValueAt( row, 2).toString());
+                phoneField.setText( model.getValueAt( row, 3).toString());
+                emailField.setText( model.getValueAt( row, 4).toString());
+                addressField.setText( model.getValueAt( row, 5).toString());
             }
         });
+        addBtn.addActionListener( e1 ->{
+            Doctor doctor = new Doctor(
+                    Integer.parseInt( idField.getText()), nameField.getText(),
+                    specialtyField.getText(), phoneField.getText(),
+                    emailField.getText(), addressField.getText());
+            manager.addDoctor( doctor);
+            loadTable();
+            clearFields();
+        });
+        editBtn.addActionListener( e2 -> {
+            int row = table.getSelectedRow();
+            if ( row >= 0){
+                int id = Integer.parseInt( model.getValueAt( row, 0).toString());
+                Doctor doctor = manager.getDoctor( id);
 
-        editBtn.addActionListener(a2 -> {
-            int row = personalTable.getSelectedRow();
-            if (row >= 0) {
-                int id = (int) personalModel.getValueAt(row, 0);
-                for (Doctor d : manager.getPersonalList()) {
-                    if (d.getDoctorID() == id) {
-                        if (!nameField.getText().isEmpty()) d.setName(nameField.getText());
-                        if (!specialtyField.getText().isEmpty()) d.setSpecialty(specialtyField.getText());
-                        if (!phoneField.getText().isEmpty()) d.setPhone(phoneField.getText());
-                        if (!emailField.getText().isEmpty()) d.setEmail(emailField.getText());
-                        if (!addressField.getText().isEmpty()) d.setAddress(addressField.getText());
-                        break;
-                    }
+                if ( doctor != null){
+                    doctor.setName(nameField.getText());
+                    doctor.setSpecialty( specialtyField.getText());
+                    doctor.setPhone( phoneField.getText());
+                    doctor.setEmail( emailField.getText());
+                    doctor.setAddress( addressField.getText());
+                    loadTable();
+                    clearFields();
                 }
-                loadTable(personalModel, manager.getPersonalList());
             }
         });
-
-        deleteBtn.addActionListener(a3 -> {
-            int row = personalTable.getSelectedRow();
-            if (row >= 0) {
-                int id = (int) personalModel.getValueAt(row, 0);
-                manager.removeFromPersonal(id);
-                loadTable(personalModel, manager.getPersonalList());
+        deleteBtn.addActionListener( e3 -> {
+            int row = table.getSelectedRow();
+            if ( row >= 0){
+                int id = Integer.parseInt( model.getValueAt( row, 0).toString());
+                manager.removeDoctor( id);
+                loadTable();
+                clearFields();
             }
         });
     }
-    
-    private void loadTable(DefaultTableModel model, List<Doctor> list) {
-        model.setRowCount(0);
-        for (Doctor d : list) {
-            model.addRow(new Object[]{
-                    d.getDoctorID(), d.getName(),
-                    d.getSpecialty(), d.getPhone(),
-                    d.getEmail(), d.getAddress()
+    private void loadTable(){
+        model.setRowCount( 0);
+        for ( Doctor d: manager.getDoctorList()){
+            model.addRow( new Object[]{
+                    d.getDoctorID(), d.getName(), d.getSpecialty(),
+                    d.getPhone(), d.getEmail(), d.getAddress()
             });
         }
     }
+    private void clearFields(){
+        idField.setText("");
+        nameField.setText("");
+        specialtyField.setText("");
+        phoneField.setText("");
+        emailField.setText("");
+        addressField.setText("");
+    }
+
 
 
     /**
