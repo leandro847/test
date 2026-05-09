@@ -26,6 +26,12 @@ public class Doctor {
     public int getDoctorID(){
         return doctorID;
     }
+    
+    public String getStringDocID(){
+        String ID = String.valueOf(getDoctorID());
+        return ID;
+    }
+    
     public void setDoctorID(int doctorID){
         this.doctorID = doctorID;
     }

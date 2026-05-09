@@ -84,8 +84,8 @@ public class EditTreatment extends javax.swing.JDialog {
         purposeTF = new javax.swing.JTextField();
         notesTF = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        delButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Edit Treatment");
@@ -103,11 +103,11 @@ public class EditTreatment extends javax.swing.JDialog {
         saveButton.setText("Save");
         saveButton.addActionListener(this::saveButtonActionPerformed);
 
-        deleteButton.setText("Delete");
-        deleteButton.addActionListener(this::deleteButtonActionPerformed);
-
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(this::cancelButtonActionPerformed);
+
+        delButton.setText("Delete");
+        delButton.addActionListener(this::delButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,7 +119,17 @@ public class EditTreatment extends javax.swing.JDialog {
                         .addGap(93, 93, 93)
                         .addComponent(freqLabel)
                         .addGap(9, 9, 9)
-                        .addComponent(freqTF, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(freqTF, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(notesLabel)
+                            .addComponent(purposeLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(purposeTF)
+                            .addComponent(notesTF, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -129,23 +139,13 @@ public class EditTreatment extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(doseTF)
                             .addComponent(nameTF)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(saveButton)
-                                .addGap(12, 12, 12)
-                                .addComponent(deleteButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cancelButton))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(notesLabel)
-                                    .addComponent(purposeLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(purposeTF)
-                                    .addComponent(notesTF, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(saveButton)
+                        .addGap(30, 30, 30)
+                        .addComponent(delButton)
+                        .addGap(28, 28, 28)
+                        .addComponent(cancelButton)))
                 .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
@@ -171,12 +171,12 @@ public class EditTreatment extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(notesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(notesLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton)
                     .addComponent(saveButton)
-                    .addComponent(deleteButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(delButton))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,16 +205,15 @@ public class EditTreatment extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
-        isDelete = true;
-        dispose();
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
+        isDelete = false;
+        dispose();
+    }//GEN-LAST:event_delButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,7 +254,7 @@ public class EditTreatment extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton delButton;
     private javax.swing.JLabel doseLabel;
     private javax.swing.JTextField doseTF;
     private javax.swing.JLabel freqLabel;
