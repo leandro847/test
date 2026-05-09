@@ -47,6 +47,7 @@ public class TreatmentTableModel extends AbstractTableModel {
     }
     
     
+    @Override
     public String getColumnName(int col){
         return columns[col];
     }

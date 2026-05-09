@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Treatment class
  * @author Amy Schmieder
  */
 public class Treatment {

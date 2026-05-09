@@ -70,6 +70,7 @@ public class TabBarsPage extends javax.swing.JFrame {
     
     private JPanel mainPanel, mail;
     private java.awt.Container originalContentPane;
+    private String email = "";
 
     
     List<Treatment> treatmentTableContents;
@@ -87,6 +88,11 @@ public class TabBarsPage extends javax.swing.JFrame {
         initTreatments();
         initAppointments();
         originalContentPane = getContentPane();
+    }
+    
+    public TabBarsPage(String email){
+        this();
+        this.email = email;
     }
 
     
