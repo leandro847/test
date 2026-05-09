@@ -15,19 +15,31 @@ public class DoctorPanel extends JPanel {
     private JTextField emailField;
     private JTextField addressField;
 
+    private JButton addBtn;
+    private JButton editBtn;
+    private JButton deleteBtn;
+
     public DoctorPanel(){
         manager = new DoctorManager();
+        setBackground( Color.WHITE);
         setLayout( new BorderLayout());
+
+        JLabel title = new JLabel("Doctor Management");
+        title.setFont( new Font("Arial", Font.BOLD, 20));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        add( title, BorderLayout.NORTH);
 
         String[] columns = {"ID", "Name", "Specialty",
         "Phone", "Email", "Address"};
 
         model = new DefaultTableModel( columns, 0);
         table = new JTable( model);
+        table.setRowHeight( 25);
         JScrollPane scrollPane = new JScrollPane( table);
-        add( scrollPane, BorderLayout.CENTER);
 
-        JPanel formPanel = new JPanel( new GridLayout( 6, 2));
+        JPanel formPanel = new JPanel();
+        formPanel.setBackground( Color.WHITE);
+        formPanel.setLayout( new GridLayout(6, 2, 10, 10));
         idField = new JTextField();
         nameField = new JTextField();
         specialtyField = new JTextField();
@@ -47,16 +59,28 @@ public class DoctorPanel extends JPanel {
         formPanel.add(emailField);
         formPanel.add( new JLabel("Address"));
         formPanel.add(addressField);
-        add( formPanel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
-        JButton addBtn = new JButton("Add");
-        JButton editBtn = new JButton("Edit");
-        JButton deleteBtn = new JButton("Delete");
+        buttonPanel.setBackground( Color.WHITE);
+        addBtn = new JButton("Add");
+        editBtn = new JButton("Edit");
+        deleteBtn = new JButton("Delete");
         buttonPanel.add(addBtn);
         buttonPanel.add(editBtn);
         buttonPanel.add(deleteBtn);
-        add( buttonPanel, BorderLayout.SOUTH);
+
+        JPanel rightPanel = new JPanel();
+        rightPanel.setBackground( Color.WHITE);
+        rightPanel.setLayout( new BorderLayout());
+        rightPanel.add( formPanel, BorderLayout.CENTER);
+        rightPanel.add( buttonPanel, BorderLayout.SOUTH);
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setBackground( Color.WHITE);
+        centerPanel.setLayout( new GridLayout(1, 2, 10, 10));
+        centerPanel.add( scrollPane);
+        centerPanel.add( rightPanel);
+        add( centerPanel, BorderLayout.CENTER);
 
         loadTable();
 
@@ -72,13 +96,17 @@ public class DoctorPanel extends JPanel {
             }
         });
         addBtn.addActionListener( e1 ->{
-            Doctor doctor = new Doctor(
-                    Integer.parseInt( idField.getText()), nameField.getText(),
-                    specialtyField.getText(), phoneField.getText(),
-                    emailField.getText(), addressField.getText());
-            manager.addDoctor( doctor);
-            loadTable();
-            clearFields();
+            try {
+                int id = Integer.parseInt( idField.getText());
+                Doctor doctor = new Doctor( id, nameField.getText(), specialtyField.getText(),
+                        phoneField.getText(),emailField.getText(), addressField.getText());
+                manager.addDoctor( doctor);
+                loadTable();
+                clearFields();
+                JOptionPane.showMessageDialog( this, "Doctor added successfully");
+            } catch ( Exception ex){
+                JOptionPane.showMessageDialog( this, "Invalid input");
+            }
         });
         editBtn.addActionListener( e2 -> {
             int row = table.getSelectedRow();
@@ -94,16 +122,22 @@ public class DoctorPanel extends JPanel {
                     doctor.setAddress( addressField.getText());
                     loadTable();
                     clearFields();
+                    JOptionPane.showMessageDialog( this, "Doctor updated successfully");
                 }
             }
         });
         deleteBtn.addActionListener( e3 -> {
             int row = table.getSelectedRow();
             if ( row >= 0){
-                int id = Integer.parseInt( model.getValueAt( row, 0).toString());
-                manager.removeDoctor( id);
-                loadTable();
-                clearFields();
+                int confirm = JOptionPane.showConfirmDialog( this, "Delete this doctor?", "Confirm Delete",
+                        JOptionPane.YES_NO_OPTION);
+                if ( confirm == JOptionPane.YES_NO_OPTION){
+                    int id = Integer.parseInt( model.getValueAt( row, 0).toString());
+                    manager.removeDoctor( id);
+                    loadTable();
+                    clearFields();
+                    JOptionPane.showMessageDialog( this,"Doctor deleted succesfully");
+                }
             }
         });
     }
