@@ -1,8 +1,8 @@
+package HealthTrackerApp;
 /* 
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package healthtracker;
 
 /**Appointment
  * --------------------
@@ -24,12 +24,14 @@ package healthtracker;
  */
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Appointment {
     private Doctor doctor;
     private LocalDate date;
-    private Time time;
-    Appointment(Doctor doc, LocalDate d, Time t){
+    private LocalTime time;
+    public Appointment(Doctor doc, LocalDate d, LocalTime t){
         doctor = doc;
         date = d;
         time = t;
@@ -43,7 +45,7 @@ public class Appointment {
         date = d;
     }
     
-    public void setTime(Time t){
+    public void setTime(LocalTime t){
         time = t;
     }
     
@@ -55,15 +57,21 @@ public class Appointment {
         return date;
     }
     
-    public Time getTime(){
+    public String getNiceDateString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        return date.format(formatter);
+    }
+    
+    public LocalTime getTime(){
         return time;
     }
     
     @Override
     public String toString(){
-        return String.format("%s\n%s \n%d/%d/%d \n%d:%d",
-                getDoctor().getName(), getDoctor().getAddress(),
-                getDate(), getDate().getMonth(), getDate().getYear(),
+        return String.format("Doctor: %s\nAddress: %s\nDate: %d/%d/%d\nTime: %d:%d",
+                getDoctor().getName(),
+                getDoctor().getAddress(),
+                getDate().getMonthValue(), getDate().getDayOfMonth(), getDate().getYear(),
                 getTime().getHour(), getTime().getMinute());
     }
 }

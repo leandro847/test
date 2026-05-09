@@ -18,7 +18,7 @@ package healthtracker;
  *
  *
  * 
- * @author dinhtran
+ * @author tamnguyen
  */
 public class HealthTracker {
 

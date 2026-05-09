@@ -6,7 +6,7 @@ package gui;
 import healthtracker.*;
 /**
  *
- * @author dinhtran
+ * @author tamnguyen
  */
 public class GUI {
 
