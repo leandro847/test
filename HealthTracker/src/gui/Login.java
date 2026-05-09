@@ -4,9 +4,10 @@
  */
 package gui;
 import healthtracker.*;
+import javax.swing.JOptionPane;
 /**
  *
- * @author dinhtran
+ * @author tamnguyen , Jincy
  */
 public class Login extends javax.swing.JFrame {
     
@@ -17,6 +18,55 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        initActions();
+    }
+
+    private void initActions() {
+        jButton1.addActionListener(e -> signIn());
+        jButton2.addActionListener(e -> signUp());
+    }
+
+    private void signIn() {
+        String email = jTextField1.getText().trim();
+        String password = new String(jPasswordField1.getPassword());
+
+        if (email.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter email and password.", "Login required", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            if (AuthManager.authenticate(email, password)) {
+                JOptionPane.showMessageDialog(this, "Login successful!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
+                new TabBarsPage(email).setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Credentials are invalid. Please sign up or try again.", "Login failed", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Unable to read authentication data. " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void signUp() {
+        String email = jTextField1.getText().trim();
+        String password = new String(jPasswordField1.getPassword());
+
+        if (email.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter an email and password to sign up.", "Signup required", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            AuthManager.register(email, password);
+            JOptionPane.showMessageDialog(this, "Account created successfully. You can now sign in.", "Signup complete", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Signup failed", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Unable to save user data. " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
