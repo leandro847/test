@@ -211,7 +211,7 @@ public class EditTreatment extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
-        isDelete = false;
+        isDelete = true;
         dispose();
     }//GEN-LAST:event_delButtonActionPerformed
 
