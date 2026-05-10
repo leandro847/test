@@ -70,11 +70,12 @@ public class TabBarsPagePanel extends javax.swing.JPanel {
  
     AppointmentDataSource appointmentDataSource;
 
-    
-    public TabBarsPagePanel(Consumer<String> navigator, JPanel profile, JPanel doctors) {
+    //ORIGINAL: public TabBarsPagePanel(Consumer<String> navigator, JPanel profile, JPanel doctors)
+    public TabBarsPagePanel(Consumer<String> navigator, JPanel profile) {
         initComponents();
         blah(navigator);
-        setupComponents(navigator, profile, doctors);
+        //ORIGINAL: setupComponents(navigator, profile, doctors);
+        setupComponents(navigator, profile);
         initTreatments();
         initAppointments();
     }
@@ -121,7 +122,8 @@ public class TabBarsPagePanel extends javax.swing.JPanel {
         }
     }
 
-    private void setupComponents(Consumer<String> navigator, javax.swing.JPanel profile, javax.swing.JPanel doctors) {
+    //ORIGINAL: private void setupComponents(Consumer<String> navigator, javax.swing.JPanel profile, javax.swing.JPanel doctors)
+    private void setupComponents(Consumer<String> navigator, javax.swing.JPanel profile) {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
@@ -451,8 +453,9 @@ public class TabBarsPagePanel extends javax.swing.JPanel {
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
- 
-        jTabbedPane4.addTab("Doctors", doctors);
+
+        //ORIGINAL: jTabbedPane4.addTab("Doctors", doctors);
+        jTabbedPane4.addTab("Doctors", new DoctorPanel());
         jTabbedPane4.addTab("Profile", profile);
  
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
