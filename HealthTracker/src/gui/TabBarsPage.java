@@ -90,14 +90,16 @@ public class TabBarsPage extends javax.swing.JFrame {
         setupComponents();
         initTreatments();
         initAppointments();
-        initDocs();
+        initDocs();     
         originalContentPane = getContentPane();
+        this.setTitle("Welcome " + email);
 
     }
     
     public TabBarsPage(String email){
         this();
         this.email = email;
+        this.setTitle("Welcome " + email); //janky to call this again. no parameter constructor shouldn't be our default
     }
 
     
