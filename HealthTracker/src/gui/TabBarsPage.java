@@ -85,6 +85,7 @@ public class TabBarsPage extends javax.swing.JFrame {
      * Creates new form TabBarsPageFrame
      */
     public TabBarsPage() {
+        System.out.println("asd");
         mainPanel = new JPanel(new CardLayout());
         initComponents();
         setupComponents();
@@ -274,7 +275,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         editAppointmentButton.setForeground(new java.awt.Color(102, 102, 102));
         editAppointmentButton.setText("Edit Appointment");
         editAppointmentButton.setMaximumSize(new java.awt.Dimension(140, 25));
-        editAppointmentButton.addActionListener(this::editAppointmentButtonActionPerformed);
+        editAppointmentButton.addActionListener(e ->editAppointmentButtonActionPerformed());
 
         appointmentSearch.setForeground(new java.awt.Color(102, 102, 102));
 
@@ -399,17 +400,17 @@ public class TabBarsPage extends javax.swing.JFrame {
         addTreatmentButton.setForeground(new java.awt.Color(102, 102, 102));
         addTreatmentButton.setText("New Treatment");
         addTreatmentButton.setMaximumSize(new java.awt.Dimension(140, 25));
-        addTreatmentButton.addActionListener(this::addTreatmentButtonActionPerformed);
+        addTreatmentButton.addActionListener(e-> addTreatmentButtonActionPerformed());
 
         editTreatmentButton.setForeground(new java.awt.Color(102, 102, 102));
         editTreatmentButton.setText("Edit Treatment");
         editTreatmentButton.setMaximumSize(new java.awt.Dimension(140, 25));
-        editTreatmentButton.addActionListener(this::editTreatmentButtonActionPerformed);
+        editTreatmentButton.addActionListener(e -> editTreatmentButtonActionPerformed());
 
         delTreatmentButton.setForeground(new java.awt.Color(102, 102, 102));
         delTreatmentButton.setText("Delete Treatment");
         delTreatmentButton.setMaximumSize(new java.awt.Dimension(140, 25));
-        delTreatmentButton.addActionListener(this::delTreatmentButtonActionPerformed);
+        delTreatmentButton.addActionListener(e -> delTreatmentButtonActionPerformed());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -481,16 +482,17 @@ public class TabBarsPage extends javax.swing.JFrame {
         newDoc.setForeground(new java.awt.Color(102, 102, 102));
         newDoc.setText("New Doctor");
         newDoc.setMaximumSize(new java.awt.Dimension(140, 25));
-        newDoc.addActionListener(this::jButton10ActionPerformed);
+        newDoc.addActionListener(e -> newDocButtonActionPerformed());
 
         editDoc.setForeground(new java.awt.Color(102, 102, 102));
         editDoc.setText("Edit Doctor");
         editDoc.setPreferredSize(new java.awt.Dimension(140, 25));
-        editDoc.addActionListener(this::jButton11ActionPerformed);
+        editDoc.addActionListener(e -> editDocButtonActionPerformed());
 
         deleteDoc.setForeground(new java.awt.Color(102, 102, 102));
         deleteDoc.setText("Delete Doctor");
         deleteDoc.setPreferredSize(new java.awt.Dimension(140, 25));
+        deleteDoc.addActionListener(e -> deleteDocButtonActionPerformed());
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -595,7 +597,8 @@ public class TabBarsPage extends javax.swing.JFrame {
         refreshUpcomingAptTextArea();
     }
     
-    private void newAppointmnetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+    private void newAppointmnetButtonActionPerformed(java.awt.event.ActionEvent evt) {   
+        System.out.println("Text");
         AddAppointment add = new AddAppointment(this, appointmentDataSource);
         add.setVisible(true);
     }                                                    
@@ -633,7 +636,7 @@ public class TabBarsPage extends javax.swing.JFrame {
 
     }                                                       
 
-    private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+    private void editAppointmentButtonActionPerformed() {                                                      
         try{
             int selectedRow = appointmentsTable.getSelectedRow();
             if (selectedRow != -1) {
@@ -658,7 +661,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         }
     }                                             
 
-    private void delTreatmentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+    private void delTreatmentButtonActionPerformed() {                                                   
         // TODO add your handling code here:
         int row = jTableTreatments.getSelectedRow();
         if(row != -1){
@@ -670,7 +673,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         }
     }                                                  
 
-    private void editTreatmentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+    private void editTreatmentButtonActionPerformed() {                                                    
         // TODO add your handling code here:
         int row = jTableTreatments.getSelectedRow();
         if(row !=-1){
@@ -678,7 +681,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         }
     }                                                   
 
-    private void addTreatmentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+    private void addTreatmentButtonActionPerformed() {                                                   
         // TODO add your handling code here:
         
         EditTreatment dialog = new EditTreatment(this, true, null, true);
@@ -695,7 +698,9 @@ public class TabBarsPage extends javax.swing.JFrame {
         refreshDocsTable();
     }
     
-    private void newDocButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+    private void newDocButtonActionPerformed() {   
+        System.err.println("Text");
+        System.out.flush();
         EditDocs add = new EditDocs(this, -1, docList);
         add.setVisible(true);
     }                                                    
@@ -704,7 +709,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         refreshDocsTable();
     }
     
-    private void deleteDocButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+    private void deleteDocButtonActionPerformed() {                                                        
  
         try {
             int selectedRow = docTable.getSelectedRow();
@@ -737,7 +742,7 @@ public class TabBarsPage extends javax.swing.JFrame {
 
     }                                                       
 
-    private void editDocButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void editDocButtonActionPerformed() {
         try{
             int selectedRow = appointmentsTable.getSelectedRow();
             if (selectedRow != -1) {
