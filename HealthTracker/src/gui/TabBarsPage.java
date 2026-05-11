@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 import java.awt.CardLayout;
 
 
+
 /**
  *
  * @author Leandropc
@@ -91,6 +92,7 @@ public class TabBarsPage extends javax.swing.JFrame {
         initAppointments();
         initDocs();
         originalContentPane = getContentPane();
+
     }
     
     public TabBarsPage(String email){
