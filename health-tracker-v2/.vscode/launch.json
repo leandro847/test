@@ -1,0 +1,44 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "healthtracker.Main",
+      "projectName": "HealthTracker"
+    },
+    {
+      "type": "java",
+      "name": "HealthTracker",
+      "request": "launch",
+      "mainClass": "healthtracker.HealthTracker",
+      "projectName": "mavenproject1"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "healthtracker.Main",
+      "projectName": "mavenproject1"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "mavenproject1"
+    },
+    {
+      "type": "java",
+      "name": "Run HealthTracker (JavaFX)",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "HealthTracker",
+      "vmArgs": "--module-path \"C:/javafx/javafx-sdk-25.0.2/lib\" --add-modules javafx.controls,javafx.fxml",
+      "classPaths": [
+        "lib/gson-2.10.1.jar"
+      ]
+    }
+  ]
+}
