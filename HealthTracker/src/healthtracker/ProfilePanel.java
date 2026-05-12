@@ -121,6 +121,8 @@ public class ProfilePanel extends javax.swing.JPanel {
     
     
     private void saveChanges() {
+        if (!isValidEmail(tfEmail.getText()))
+            cancelChanges();
         // update user info
         //user.userID = Integer.parseInt(tfID.getText());
         user.name = tfName.getText();
@@ -140,6 +142,14 @@ public class ProfilePanel extends javax.swing.JPanel {
         tfName.setText(valName.getText());
         tfEmail.setText(valEmail.getText());
         setEditing(false);
+    }
+    
+    
+    public static boolean isValidEmail(String email) {
+        int atIndex = email.indexOf("@");
+        return email != null && atIndex > 0 &&
+               email.charAt(atIndex + 1) != '.' &&  // no dot right after @
+               (email.contains(".com") || email.contains(".org") || email.contains(".edu"));
     }
     
     

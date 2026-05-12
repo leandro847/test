@@ -93,6 +93,14 @@ public class MailPanel extends javax.swing.JPanel {
     }
     
     
+    public static boolean isValidEmail(String email) {
+        int atIndex = email.indexOf("@");
+        return email != null && atIndex > 0 &&
+               email.charAt(atIndex + 1) != '.' &&  // no dot right after @
+               (email.contains(".com") || email.contains(".org") || email.contains(".edu"));
+    }
+    
+    
     private void buildButtons() {
         btnProfile = new JButton("View Profile");
         btnSend = new JButton("Send Mail");
@@ -103,9 +111,16 @@ public class MailPanel extends javax.swing.JPanel {
 
     
     private void sendMail() {
+        if (!isValidEmail(tfEmail.getText())) {
+            lblStatus.setText("Invalid email");
+            lblStatus.setForeground(new Color(150, 0, 0));
+        }
+        else {
+            lblStatus.setText("✔ Message sent successfully!");
+            lblStatus.setForeground(new Color(0, 150, 0));
+        }
         tfEmail.setText("");
         areaMessage.setText("");
-        lblStatus.setText("✔ Message sent successfully!");
         Timer timer = new Timer(3000, e -> lblStatus.setText(" "));
         timer.setRepeats(false);
         timer.start();
@@ -136,4 +151,3 @@ public class MailPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify                     
     // End of variables declaration                   
 }
-
