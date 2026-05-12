@@ -744,7 +744,8 @@ public class TabBarsPage extends javax.swing.JFrame {
 
     private void editDocButtonActionPerformed() {
         try{
-            int selectedRow = appointmentsTable.getSelectedRow();
+            int selectedRow = docTable.getSelectedRow();
+            System.out.println("Selected row is " + selectedRow);
             if (selectedRow != -1) {
                 EditDocs add = new EditDocs(this, this.getSelectedIndexDocs(), docList);
                 add.setVisible(true);
