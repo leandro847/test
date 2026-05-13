@@ -4,6 +4,7 @@
  */
 package healthtracker;
 
+import gui.*;
 import java.awt.*;
 import javax.swing.*;
 import java.util.function.Consumer;
@@ -110,7 +111,8 @@ public class ProfilePanel extends javax.swing.JPanel {
         });
         
         btnLogout.addActionListener(e -> {
-            navigator.accept("login"); // go to login page
+            SwingUtilities.getWindowAncestor(this).dispose();
+            new Login1().setVisible(true); 
             cancelChanges(); // in case user is editing when logout pressed
         });
         
