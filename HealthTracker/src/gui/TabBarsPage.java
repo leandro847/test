@@ -683,13 +683,15 @@ public class TabBarsPage extends javax.swing.JFrame {
     private void newDocButtonActionPerformed() {   
         System.err.println("Text");
         System.out.flush();
-        EditDocs add = new EditDocs(this, -1, docList, true);
+        EditDocs add = new EditDocs(this, true, -1, docList, true);
         add.setLocationRelativeTo(this);
         add.setVisible(true);
         if(add.isConfirmed()){
             Doctor newDoctor = add.getDoctor();
             docList.addDoctor(newDoctor);
         }
+        this.refreshDocsTable();
+        this.refreshDocPage();
     }                                                    
     
     private void refreshDocsTable(){
@@ -720,7 +722,7 @@ public class TabBarsPage extends javax.swing.JFrame {
             int selectedRow = this.getSelectedIndexDocs();
             System.out.println("Selected row is " + selectedRow);
             if (selectedRow != -1) {
-                EditDocs edit = new EditDocs(this, selectedRow, docList, false);
+                EditDocs edit = new EditDocs(this, true, selectedRow, docList, false);
                 edit.setVisible(true);
                 if(edit.isConfirmed()){
                     Doctor newDoctor = edit.getDoctor();
@@ -735,6 +737,7 @@ public class TabBarsPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error!");
         } 
     }
+
         
     private void deleteDocButtonActionPerformed() {                                                        
         try {

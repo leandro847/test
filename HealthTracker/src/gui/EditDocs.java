@@ -11,7 +11,7 @@ import HealthReminder.DoctorManager;
  *
  * @author dinhtran
  */
-public class EditDocs extends javax.swing.JFrame {
+public class EditDocs extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditDocs.class.getName());
 
@@ -20,15 +20,14 @@ public class EditDocs extends javax.swing.JFrame {
      */
     
     
-    TabBarsPage homepage;
     DoctorManager docList;
     private boolean isNew;
     private boolean isConfirmed = false;
     
     
     
-    public EditDocs(TabBarsPage homepage, int index, DoctorManager docList, boolean add){
-        this.homepage = homepage;
+    public EditDocs(java.awt.Frame parent, boolean modal, int index, DoctorManager docList, boolean add){
+        super(parent, modal);
         this.docList = docList;
         isNew = add;
         initComponents();    
@@ -79,7 +78,7 @@ public class EditDocs extends javax.swing.JFrame {
         saveDoc = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID:");
 
@@ -200,7 +199,6 @@ public class EditDocs extends javax.swing.JFrame {
 //        docList.addDoctor(d);
 //        homepage.refreshDocPage();
         isConfirmed = true;
-        homepage.refreshDocPage();
         dispose();
     }//GEN-LAST:event_saveDocActionPerformed
 
